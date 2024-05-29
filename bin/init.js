@@ -7,43 +7,46 @@ import fs from 'fs';
 import ora from 'ora';
 
 const git = simpleGit();
-const repoUrl = 'https://github.com/tefanhhh/nestjs-starter.git';
+const repoUrl = {
+  'nestjs-starter': 'https://github.com/tefanhhh/nestjs-starter.git',
+  'vite-react-starter': 'https://github.com/tefanhhh/vite-react-starter.git',
+};
 
 async function init() {
   const answers = await inquirer.prompt([
     {
       type: 'list',
-      name: 'stack',
-      message: 'What is stack you want to generate for?',
-      choices: ['CMS', 'Blue', 'Green'],
+      name: 'Choose Template',
+      message: 'What template you want to use ?',
+      choices: Object.keys(repoUrl),
     },
     {
       type: 'input',
-      name: 'projectName',
+      name: 'name',
       message: 'Project Name:',
       default: 'my-project',
     },
     {
       type: 'input',
-      name: 'projectVersion',
+      name: 'version',
       message: 'Project Version:',
       default: '1.0.0',
     },
     {
       type: 'input',
-      name: 'projectDescription',
+      name: 'description',
       message: 'Project Description:',
       default: 'My NestJS project.',
     },
     {
       type: 'input',
-      name: 'projectAuthor',
+      name: 'author',
       message: 'Project Author:',
       default: 'Tefan Haetami',
     },
   ]);
 
-  const targetDir = path.join(process.cwd(), answers.projectName);
+  const targetDir = path.join(process.cwd(), answers.name);
   const spinner = ora('Cloning repository...').start();
 
   git.clone(repoUrl, targetDir)
@@ -56,10 +59,10 @@ async function init() {
        // Change package.json name, version, description, and author
        const packageJsonPath = path.join(targetDir, 'package.json');
        const packageJsonData = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
-       packageJsonData.name = answers.projectName;
-       packageJsonData.version = answers.projectVersion;
-       packageJsonData.description = answers.projectDescription;
-       packageJsonData.author = answers.projectAuthor;
+       packageJsonData.name = answers.name;
+       packageJsonData.version = answers.version;
+       packageJsonData.description = answers.description;
+       packageJsonData.author = answers.author;
        packageJsonData.private = true;
        packageJsonData.license = 'MIT';
        fs.writeFileSync(packageJsonPath, JSON.stringify(packageJsonData, null, 2));
