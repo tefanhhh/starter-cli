@@ -16,7 +16,7 @@ async function init() {
   const answers = await inquirer.prompt([
     {
       type: 'list',
-      name: 'Choose Template',
+      name: 'template',
       message: 'What template you want to use ?',
       choices: Object.keys(repoUrl),
     },
@@ -49,7 +49,7 @@ async function init() {
   const targetDir = path.join(process.cwd(), answers.name);
   const spinner = ora('Cloning repository...').start();
 
-  git.clone(repoUrl, targetDir)
+  git.clone(repoUrl[answers.template], targetDir)
     .then(() => {
       spinner.succeed('Repository cloned successfully.');
 
