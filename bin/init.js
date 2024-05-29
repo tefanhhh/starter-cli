@@ -29,6 +29,12 @@ async function init() {
       // Clean up unnecessary files (e.g., .git folder)
       fs.rmSync(path.join(targetDir, '.git'), { recursive: true, force: true });
 
+       // Change package.json name
+       const packageJsonPath = path.join(targetDir, 'package.json');
+       const packageJsonData = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
+       packageJsonData.name = answers.projectName;
+       fs.writeFileSync(packageJsonPath, JSON.stringify(packageJsonData, null, 2));
+
       console.log(`Project initialized successfully in ${targetDir}.`);
     })
     .catch((err) => {
