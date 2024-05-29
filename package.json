@@ -1,10 +1,10 @@
 {
-  "name": "@tefanhaetami/nestjs-starter-cli",
+  "name": "@tefanhaetami/starter-cli",
   "version": "1.1.0",
   "description": "Command Line Interface for NestJS Starter",
   "main": "index.js",
   "bin": {
-    "@tefanhaetami/nestjs-starter-cli": "./bin/init.js"
+    "@tefanhaetami/starter-cli": "./bin/init.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

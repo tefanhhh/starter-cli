@@ -12,6 +12,12 @@ const repoUrl = 'https://github.com/tefanhhh/nestjs-starter.git';
 async function init() {
   const answers = await inquirer.prompt([
     {
+      type: 'list',
+      name: 'stack',
+      message: 'What is stack you want to generate for?',
+      choices: ['CMS', 'Blue', 'Green'],
+    },
+    {
       type: 'input',
       name: 'projectName',
       message: 'Project Name:',
