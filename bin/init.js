@@ -14,9 +14,27 @@ async function init() {
     {
       type: 'input',
       name: 'projectName',
-      message: 'Project name:',
+      message: 'Project Name:',
       default: 'my-project',
-    }
+    },
+    {
+      type: 'input',
+      name: 'projectVersion',
+      message: 'Project Version:',
+      default: '1.0.0',
+    },
+    {
+      type: 'input',
+      name: 'projectDescription',
+      message: 'Project Description:',
+      default: 'My NestJS project.',
+    },
+    {
+      type: 'input',
+      name: 'projectAuthor',
+      message: 'Project Author:',
+      default: 'Tefan Haetami',
+    },
   ]);
 
   const targetDir = path.join(process.cwd(), answers.projectName);
@@ -29,10 +47,15 @@ async function init() {
       // Clean up unnecessary files (e.g., .git folder)
       fs.rmSync(path.join(targetDir, '.git'), { recursive: true, force: true });
 
-       // Change package.json name
+       // Change package.json name, version, description, and author
        const packageJsonPath = path.join(targetDir, 'package.json');
        const packageJsonData = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
        packageJsonData.name = answers.projectName;
+       packageJsonData.version = answers.projectVersion;
+       packageJsonData.description = answers.projectDescription;
+       packageJsonData.author = answers.projectAuthor;
+       packageJsonData.private = true;
+       packageJsonData.license = 'MIT';
        fs.writeFileSync(packageJsonPath, JSON.stringify(packageJsonData, null, 2));
 
       console.log(`Project initialized successfully in ${targetDir}.`);
