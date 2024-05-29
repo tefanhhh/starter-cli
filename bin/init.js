@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-const simpleGit = require('simple-git');
-const inquirer = require('inquirer');
-const path = require('path');
-const fs = require('fs');
-const ora = require('ora');
+import simpleGit from 'simple-git';
+import inquirer from 'inquirer';
+import path from 'path';
+import fs from 'fs';
+import ora from 'ora';
 
 const git = simpleGit();
 const repoUrl = 'https://github.com/tefanhhh/nestjs-starter.git';
@@ -15,7 +15,7 @@ async function init() {
       type: 'input',
       name: 'projectName',
       message: 'Project name:',
-      default: 'nestjs-starter',
+      default: 'my-project',
     }
   ]);
 

@@ -1,6 +1,6 @@
 {
   "name": "@tefanhaetami/nestjs-starter-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Command Line Interface for NestJS Starter",
   "main": "index.js",
   "bin": {
@@ -16,5 +16,6 @@
   },
   "author": "Tefan Haetami",
   "private": false,
-  "license": "MIT"
+  "license": "MIT",
+  "type": "module"
 }
